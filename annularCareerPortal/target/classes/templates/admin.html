@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recruiter Panel</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>HR DashBoard</h2>
+    <h3>Candidate Details</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email Id</th>
+                <th>Phone No</th>
+                <th>Position Applied for</th>
+                <th>Experience</th>
+                <th>Passed Out Year (Only for Fresher)</th>
+                <th>CCTC</th>
+                <th>ECTC</th>
+                <th>Resume</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="aCand:${AllCand}">
+                <td th:text="${aCand.firstName}"></td>
+                <td th:text="${aCand.email}"></td>
+                <td th:text="${aCand.phoneNo}"></td>
+                <td th:text="${aCand.position}"></td>
+                <td th:text="${aCand.experience}"></td>
+                <td th:text="${aCand.passout}"></td>
+                <td th:text="${aCand.cctc}"></td>
+                <td th:text="${aCand.ectc}"></td>
+                <td>
+                    <a th:href="@{'/downloadresume/' + ${aCand.candId}}">
+                        <button>Download Resume</button>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>

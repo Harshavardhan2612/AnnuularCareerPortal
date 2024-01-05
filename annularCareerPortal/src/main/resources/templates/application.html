@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Application Form</title>
+</head>
+
+<body>
+	<form th:action="@{/save}" enctype="multipart/form-data" method="post" th:object="${candidate}">
+		<label>First Name : <input th:field="${candidate.firstName}" name="fname" type="text" required> *</label><br />
+		<label>Middle Name : <input th:field="${candidate.middleName}" name="mname" type="text"></label><br />
+		<label>Last Name : <input th:field="${candidate.lastName}" name="lname" type="text" required> *</label><br />
+		<label>Phone No : <input th:field="${candidate.phoneNo}" name="mobno" type="text" required> *</label><br />
+		<label>E-mail Id : <input th:field="${candidate.email}" class="email" name="email" type="email" required>
+			*</label><br />
+		<label>Educatinal Qualification : <input th:field="${candidate.educationalQual}" name="eq" type="text"
+				required></label><br />
+		<label>Key Skills : <input th:field="${candidate.keySkills}" name="keyskills" type="text" required>
+			*</label><br />
+		<label>Position : <select th:field="${candidate.position}" required>
+				<option value="">-select-</option>
+				<option th:value="Java_Developer">Java Developer</option>
+				<option th:value="React_Developer">React Developer</option>
+				<option th:value="Test_Engineer">Test Engineer</option>
+				<option th:value="Data_Engineer">Data Engineer</option>
+				<option th:value="Human_Resources">Human Resources</option>
+			</select>
+		</label><br />
+		<label>Experience : <select th:field="${candidate.experience}" id="experience" onchange="toggleFields()"
+				required>
+				<option value="">-select-</option>
+				<option th:value="0">Fresher</option>
+				<option th:value="1">1 year</option>
+				<option th:value="2">2 years</option>
+				<option th:value="3">3 years</option>
+				<option th:value="More_than_3">More than 3 Years</option>
+			</select> *
+		</label><br />
+		<div id="exfieldfield" style="display: none;">
+			<label>CCTC : <input id="cctc" th:field="${candidate.cctc}" name="cctc" type="text"> *</label><br />
+			<label>ECTC : <input id="ectc" th:field="${candidate.ectc}" name="ectc" type="text"> *</label><br />
+			<label>Notice Period : <select id="np" th:field="${candidate.noticePeriod}">
+					<option value="">-select-</option>
+					<option th:value="Immediate">Immediate</option>
+					<option th:value="Half_Month">0-15 days</option>
+					<option th:value="One_Month">1 month</option>
+					<option th:value="3_Months">3 months</option>
+				</select>
+			</label><br />
+		</div>
+		<div id="fresherfield" style="display: none;">
+			<label>PassedOut Year : <input id="py" th:field="${candidate.passout}" name="psot" type="text">
+				*</label><br />
+		</div>
+		<label>Resume : <input name="resume" id="resume" th:field="${candidate.resume}" type="file"
+				accept=".pdf, .doc, .docx" required />
+			*</label><br />
+		<button type="submit">Submit</button>
+	</form>
+	<script>
+		function toggleFields() {
+			var experienceSelect = document.getElementById("experience");
+			var fresherFields = document.getElementById("fresherfield");
+			var experiencedFields = document.getElementById("exfieldfield");
+
+			if (experienceSelect.value === "0") {
+				fresherFields.style.display = "block";
+				experiencedFields.style.display = "none";
+
+			} else {
+				fresherFields.style.display = "none";
+				experiencedFields.style.display = "block";
+			}
+		}
+	</script>
+</body>
+
+</html>
